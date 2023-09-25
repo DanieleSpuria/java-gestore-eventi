@@ -12,23 +12,35 @@ public class Evento {
 		setTitolo(titolo);
 		setData(data);
 		if (postiTotali < 0) 
-			throw new Exception("Il numero dei posti non può essere negativo!");
+			throw new Exception("\nIl numero dei posti non può essere negativo!\n");
 		else this.postiTotali = postiTotali;
 	}
 	
-	public void prenota() throws Exception {
+	public void prenota(int n) throws Exception {
 		if (postiTotali == postiPrenotati)
-			throw new Exception("Sold out!");
+			throw new Exception("\nSold out!\n");
 		if (data.isBefore(LocalDate.now()))
-			throw new Exception("L'evento è già passato!");
-		postiPrenotati++;
+			throw new Exception("\nL'evento è già passato!\n");
+		if (n < 0)
+			throw new Exception("\nNon può essere un numero negativo!\n");
+		if (n > postiTotali)
+			throw new Exception("\nNon può essere un numero maggiore dei posti disponibili!\n");
+		for (int i = 0; i < n; i++)
+			postiPrenotati++;
 	}
 	
-	public void disdici() throws Exception {
+	public void disdici(int n) throws Exception {
 		if (postiPrenotati == 0)
-			throw new Exception("Non ci sono prenotazioni!");
+			throw new Exception("\nNon ci sono prenotazioni!\n");
 		if (data.isBefore(LocalDate.now()))
-			throw new Exception("L'evento è già passato!");
+			throw new Exception("\nL'evento è già passato!\n");
+		if (n < 0)
+			throw new Exception("\nNon può essere un numero negativo!\n");
+		if (n > postiTotali)
+			throw new Exception("\nNon può essere un numero maggiore dei posti disponibili!\n");
+		if (n > postiPrenotati)
+			throw new Exception("\nNon può essere un numero maggiore dei posti prenotati!\n");
+		for (int i = 0; i < n; i++)
 		postiPrenotati--;
 	}
 	
@@ -43,7 +55,7 @@ public class Evento {
 	}
 	public void setData(LocalDate data) throws Exception {
 		if (data.isBefore(LocalDate.now())) 
-			throw new Exception("Questa data è già passata!");
+			throw new Exception("\nData non valida!\n");
 		this.data = data;
 	}
 	public int getPostiTotali() {
@@ -51,6 +63,10 @@ public class Evento {
 	}
 	public int getPostiPrenotati() {
 		return postiPrenotati;
+	}
+	
+	public String getPosti() {
+		return getPostiPrenotati() + "/" + getPostiTotali();
 	}
 	
 	@Override
