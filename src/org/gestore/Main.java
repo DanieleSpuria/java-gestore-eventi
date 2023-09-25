@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import org.events.Concerto;
 import org.events.Evento;
+import org.events.ProgrammaEventi;
 
 public class Main {
 	public static void main(String[] args) {
@@ -80,5 +81,27 @@ public class Main {
 		} catch (Exception e) {
 			e.getMessage();
 		}
+		
+		System.out.println("-------------\n");
+		System.out.println("[ programma eventi ]\n");
+		
+		ProgrammaEventi pro = new ProgrammaEventi("bellissimi");
+		
+		try {
+			Evento ev = new Evento("bello", LocalDate.of(2023, 12, 12), 100);
+			Evento al = new Evento("poppo", LocalDate.of(2023, 10, 12), 100);
+			Evento oi = new Evento("occhio", LocalDate.of(2023, 11, 10), 100);
+			
+			LocalDate loc = LocalDate.of(2023, 12, 12);
+			
+			pro.addEvento(ev);
+			pro.addEvento(oi);
+			pro.addEvento(al);
+		
+			System.out.println(pro);
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
+
 }
