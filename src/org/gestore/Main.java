@@ -29,19 +29,20 @@ public class Main {
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-				
-		int preno = -1;
+		
+		boolean c = true;
 		String resp = "";
-		while(preno < 0 || preno > evento.getPostiTotali()) {
+		while(c) {
 			try {
 					System.out.print("Vuoi aggiungere delle prenotazioni? (s/n): ");
 					resp = scan.nextLine();
 					if (resp.equalsIgnoreCase("s")) {
 						System.out.print("Quante prenotazioni vuoi aggiungere? ");
-						preno = Integer.valueOf(scan.nextLine());
+						int preno = Integer.valueOf(scan.nextLine());
 						evento.prenota(preno);
-						System.out.println("");
 					}
+					c = false;
+					System.out.println("");
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
@@ -49,23 +50,22 @@ public class Main {
 			
 		}
 		
-		int disdo = -1;
-		while(disdo < 0 || disdo > evento.getPostiTotali()) {
-
+		c = true;
+		while(c) {
 			try {
 					System.out.print("Vuoi disdire dei posti? (s/n): ");
 					resp = scan.nextLine();
 					if (resp.equalsIgnoreCase("s")) {
 						System.out.print("Quanti posti vuoi disdire? ");
-						disdo = Integer.valueOf(scan.nextLine());
+						int disdo = Integer.valueOf(scan.nextLine());
 						evento.disdici(disdo);
-						System.out.println("");
 					}
+						c = false;
+					System.out.println("");
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
 			System.out.println(evento.getPosti() + "\n");
-
 		}	
 		
 		scan.close();
