@@ -68,7 +68,7 @@ public class ProgrammaEventi {
 	@Override
 	public String toString() {
 		
-		return "[ " + getTitolo() + " ]\n" 
+		return "[ " + getTitolo() + " ]\n" + "\n" 
 				+ dataLista();
 	}
 }
