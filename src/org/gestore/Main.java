@@ -135,6 +135,7 @@ public class Main {
 				case 2: {
 					System.out.println("\nInfo eventi: \n");
 					eventi.resEventi();
+					break;
 				}
 				case 3: {
 					System.out.println("\nNumero eventi: " + eventi.numeroEventi());
@@ -143,12 +144,12 @@ public class Main {
 				case 4: {
 					System.out.print("\nInserire data (yyyy-mm-dd): ");
 					LocalDate data = LocalDate.parse(scan.nextLine());
-					System.out.print("\nEventi con la data inserita:\n");
+					System.out.println("\nEventi filtrati per data:\n");
 					eventi.resEventiData(data);
 					break;
 				}
 				case 5: {
-					System.out.print("\nElenco eventi ordinati per data:\n" + eventi);
+					System.out.println("\nElenco eventi ordinati per data:\n" + eventi);
 					break;
 				}
 				case 6: {

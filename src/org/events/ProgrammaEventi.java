@@ -30,7 +30,7 @@ public class ProgrammaEventi {
 	public void resEventiData(LocalDate data) {
 		for (Evento evento : eventi)
 			if (evento.getData().isEqual(data))
-				System.out.println(evento);
+				System.out.println(evento.getData() + " / " + evento.getTitolo());
 	}
 	
 	public int numeroEventi() {
@@ -71,7 +71,7 @@ public class ProgrammaEventi {
 	@Override
 	public String toString() {
 		
-		return "[ " + getTitolo() + " ]\n" + "\n" 
+		return "\n[ " + getTitolo() + " ]\n" + "\n" 
 				+ dataLista();
 	}
 }
