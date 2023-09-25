@@ -21,8 +21,10 @@ public class ProgrammaEventi {
 	}
 	
 	public void resEventi() {
-		for (Evento evento : eventi) 
-			System.out.println(evento);
+		for (Evento evento : eventi) {
+			System.out.println("[ " + evento.getTitolo() + " ]");
+			System.out.println(evento + "\n");
+		}
 	}
 	
 	public void resEventiData(LocalDate data) {
@@ -49,7 +51,7 @@ public class ProgrammaEventi {
                 .sorted(Comparator.comparing(Evento::getData))
                 .collect(Collectors.toList());
 		for (Evento evento : eventiOrdinati)
-			eventiOrd += evento + "\n";
+			eventiOrd += evento.getData() + " / " + evento.getTitolo() + "\n";
 		return eventiOrd;
 	}
 	

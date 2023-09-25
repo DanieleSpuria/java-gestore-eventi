@@ -2,7 +2,7 @@ package org.events;
 
 import java.time.LocalDate;
 
-public class Evento {
+public abstract class Evento {
 	private String titolo;
 	private LocalDate data;
 	private int postiTotali;

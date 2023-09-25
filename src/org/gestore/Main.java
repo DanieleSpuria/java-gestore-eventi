@@ -7,6 +7,7 @@ import java.util.Scanner;
 import org.events.Concerto;
 import org.events.Evento;
 import org.events.ProgrammaEventi;
+import org.events.Spettacolo;
 
 public class Main {
 	public static void main(String[] args) {
@@ -18,6 +19,7 @@ public class Main {
 		String resp = "";
 		int scelta = 0;
 		boolean newEventoFlag = true;
+		String prezzoStr = "";
 		
 		// CREAZIONE PROGRAMMA EVENTI
 		System.out.print("Inserire nome programma eventi: ");
@@ -37,11 +39,12 @@ public class Main {
 			
 			System.out.println("Cosa desideri fare adesso? \n");
 			System.out.println("1) aggiungere un evento");
-			System.out.println("2) contare eventi");
-			System.out.println("3) filtrare per data");
-			System.out.println("4) ordinare per data");
-			System.out.println("5) svuotare il programma");
-			System.out.println("6) esci");
+			System.out.println("2) info eventi");
+			System.out.println("3) contare eventi");
+			System.out.println("4) filtrare per data");
+			System.out.println("5) ordinare per data");
+			System.out.println("6) svuotare il programma");
+			System.out.println("7) esci");
 			
 			scelta = Integer.valueOf(scan.nextLine());
 			
@@ -49,6 +52,12 @@ public class Main {
 				case 1: {
 					while (newEventoFlag) {	
 						// EVENTO
+						System.out.println("\nScegli il tipo di evento:");
+						System.out.println("1) concerto");
+						System.out.println("2) spettacolo");
+						
+						scelta = Integer.valueOf(scan.nextLine());
+	
 						try {
 							System.out.println("\n°°Nuovo evento°°\n");
 							System.out.print("Inserire titolo: ");
@@ -58,9 +67,26 @@ public class Main {
 							System.out.print("Inserire numero posti totali: ");
 							int postiTotali = Integer.valueOf(scan.nextLine());
 							
-							evento = new Evento(titolo, data, postiTotali);			
+							if (scelta == 1) {
+								System.out.print("Inserisci orario (hh:mm): ");
+								LocalTime orario = LocalTime.parse(scan.nextLine());
+								System.out.print("Inserisci prezzo (00.00...): ");
+								prezzoStr = scan.nextLine();
+								BigDecimal prezzo = new BigDecimal(prezzoStr);
+								
+								evento = new Concerto(titolo, data, postiTotali, orario, prezzo);	
+							}
+							
+							if (scelta == 2) {
+								System.out.print("Inserisci prezzo (00.00...): ");
+								prezzoStr = scan.nextLine();
+								BigDecimal prezzo = new BigDecimal(prezzoStr);
+								
+								evento = new Spettacolo(titolo, data, postiTotali, prezzo);	
+							}
+									
 							eventi.addEvento(evento);
-							System.out.println("\n[ "+ evento + " ]\n");
+							System.out.println("\n"+ evento + "\n");
 						} catch (Exception e) {
 							System.err.println(e.getMessage());
 						}
@@ -81,8 +107,7 @@ public class Main {
 							} catch (Exception e) {
 								System.err.println(e.getMessage());
 							}
-							System.out.println(evento.getPosti() + "\n");
-							
+							System.out.println(evento + "\n");
 						}
 						
 						// DISDIRE 
@@ -101,48 +126,42 @@ public class Main {
 							} catch (Exception e) {
 								System.err.println(e.getMessage());
 							}
-							System.out.println(evento.getPosti() + "\n");
+							System.out.println(evento + "\n");
 						}
 						break;
 					}
 					break;
 				}
 				case 2: {
+					System.out.println("\nInfo eventi: \n");
+					eventi.resEventi();
+				}
+				case 3: {
 					System.out.println("\nNumero eventi: " + eventi.numeroEventi());
 					break;
 				}
-				case 3: {
+				case 4: {
 					System.out.print("\nInserire data (yyyy-mm-dd): ");
 					LocalDate data = LocalDate.parse(scan.nextLine());
 					System.out.print("\nEventi con la data inserita:\n");
 					eventi.resEventiData(data);
 					break;
 				}
-				case 4: {
+				case 5: {
 					System.out.print("\nElenco eventi ordinati per data:\n" + eventi);
 					break;
 				}
-				case 5: {
+				case 6: {
 					eventi.svuotaLista();
 					break;
 				}
-				case 6: {
+				case 7: {
 					exit = true;
 					System.out.println("\nSei uscito dal programma!\n");
 					break;
 				}
 			}
 		}
-						
-//		System.out.println("------------\n");
-//		System.out.println("[ concerto ]");
-//		
-//		try {
-//			BigDecimal n = BigDecimal.valueOf(32.504);
-//			Concerto con = new Concerto("bello", LocalDate.of(2023, 12, 12), 100, LocalTime.of(22, 30), n);
-//			System.out.println(con);		
-//		} catch (Exception e) {
-//			e.getMessage();
-//		}
+		scan.close();
 	}
 }

@@ -17,4 +17,16 @@ public class Spettacolo extends Evento {
 	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo = prezzo;
 	}	
+	
+	public String getPrezzoFormat() {
+		return String.format("%.2f €", prezzo);
+	}
+	
+	@Override
+	public String toString() {
+		return "Data: " + getData() +
+			   "\nTitolo: " + getTitolo() +
+			   "\nPrezzo: " + getPrezzoFormat() +
+			   "\nPosti prenotati: " + getPosti();
+	}
 }

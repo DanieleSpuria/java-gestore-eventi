@@ -42,6 +42,7 @@ public class Concerto extends Evento {
 		return "Data: " + getData() +
 			   "\nOra: " + getOraFormat() +
 			   "\nTitolo: " + getTitolo() +
-			   "\nPrezzo: " + getPrezzoFormat();
+			   "\nPrezzo: " + getPrezzoFormat() +
+			   "\nPosti prenotati: " + getPosti();
 	}
 }
