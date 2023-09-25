@@ -40,6 +40,7 @@ public class ProgrammaEventi {
 	
 	public void svuotaLista() {
 		eventi.clear();
+		System.out.println("\n" + titolo + " è stato svuotato con successo!");
 	}
 	
 	public String dataLista() {
